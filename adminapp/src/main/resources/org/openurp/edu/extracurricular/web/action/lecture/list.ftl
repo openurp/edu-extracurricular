@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.grid items=lessons var="lesson"]
+[@b.grid items=lectures var="lecture"]
   [@b.gridbar]
     bar.addItem("${b.text("action.new")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
@@ -9,10 +9,10 @@
   [@b.row]
     [@b.boxcol /]
     [@b.col width="5%" property="crn" title="序号"/]
-    [@b.col width="10%" property="date" title="日期"]${(lesson.date?string('yyyy-MM-dd'))?default('')}[/@]
-    [@b.col width="10%" title="时间"]${lesson.beginAt! }-${lesson.endAt }[/@]
+    [@b.col width="10%" property="date" title="日期"]${(lecture.date?string('yyyy-MM-dd'))?default('')}[/@]
+    [@b.col width="10%" title="时间"]${lecture.beginAt! }-${lecture.endAt }[/@]
     [@b.col width="20%" property="subject" title="活动名称（类别）"/]
-    [@b.col width="10%" property="teachDepart.name" title="开课院系"/]
+    [@b.col width="10%" property="depart.name" title="开课院系"/]
     [@b.col width="10%" property="room.name" title="教室"/]
     [@b.col width="10%" property="location" title="地点"/]
     [@b.col width="10%" property="teachers" title="组织教师"/]

@@ -19,11 +19,11 @@
 package org.openurp.edu.extracurricular.web
 
 import org.beangle.cdi.bind.BindModule
-import org.openurp.edu.extracurricular.web.action.LessonAction
+import org.openurp.edu.extracurricular.web.action.LectureAction
 
 class DefaultModule extends BindModule {
 
   protected override def binding() {
-    bind(classOf[LessonAction])
+    bind(classOf[LectureAction])
   }
 }

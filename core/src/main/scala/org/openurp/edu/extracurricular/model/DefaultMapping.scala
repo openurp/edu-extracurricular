@@ -18,8 +18,7 @@
  */
 package org.openurp.edu.extracurricular.model
 
-import org.beangle.data.orm.IdGenerator
-import org.beangle.data.orm.MappingModule
+import org.beangle.data.orm.{ IdGenerator, MappingModule }
 
 class DefaultMapping extends MappingModule {
 
@@ -27,6 +26,16 @@ class DefaultMapping extends MappingModule {
     defaultIdGenerator(IdGenerator.AutoIncrement)
     defaultCache("openurp.extracurricular", "read-write")
 
-    bind[Lesson]
+    bind[Lecture].on(e => declare(
+      e.audiences is depends("lecture")))
+
+    bind[Audience]
+
+    bind[FaqActivity]
+
+    bind[TutorialActivity].on(e => declare(
+      e.stds is depends("activity")))
+
+    bind[TutoredStd]
   }
 }
