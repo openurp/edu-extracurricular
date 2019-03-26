@@ -31,7 +31,7 @@ class Lecture extends LongId {
 
   var endAt: HourMinute = _
 
-  var room: Option[Classroom] = _
+  var room: Option[Classroom] = None
 
   var location: Option[String] = None
 

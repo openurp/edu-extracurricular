@@ -4,7 +4,6 @@
   <script type="text/javascript" crossorigin="anonymous" src="${base}/static/js/ajax-chosen.js"></script>
 [@b.tabs]
   [@b.form theme="list" action=b.rest.save(lecture)]
-    [@b.textfield name="lecture.crn" label="序号" value="${lecture.crn!}" required="true" maxlength="20" style="width:200px;"/]
     [@b.datepicker label="日期" required="true" id="lecture.date" name="lecture.date"
     value="${(lecture.date?string('yyyy-MM-dd'))?default('')}" style="width:200px"  format="yyyy-MM-dd" /]
     [@b.startend label="时间"
@@ -14,7 +13,7 @@
     [@b.select name="lecture.depart.id" label="开课院系" value="${(lecture.depart.id)!}" style="width:200px;" items=departments empty="..." required="true"/]
     [@b.field label="教室"]
       <select id="roomId" name="lecture.room.id" style="width:200px;">
-        <option value='lecture.room.id' selected>${(lecture.room.name)!}</option>
+        <option value='${(lecture.room.id)!}' selected>${(lecture.room.name)!}</option>
       </select>
     [/@]
     [@b.textfield name="lecture.location" label="地点" value="${lecture.location!}" maxlength="100" style="width:200px;"/]
