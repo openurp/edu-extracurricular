@@ -20,10 +20,12 @@ package org.openurp.edu.extracurricular.web
 
 import org.beangle.cdi.bind.BindModule
 import org.openurp.edu.extracurricular.web.action.LectureAction
+import org.openurp.edu.extracurricular.model.TutorialActivity
+import org.openurp.edu.extracurricular.web.action.TutorialActivityAction
 
 class DefaultModule extends BindModule {
 
   protected override def binding() {
-    bind(classOf[LectureAction])
+    bind(classOf[LectureAction],classOf[TutorialActivityAction])
   }
 }

@@ -19,11 +19,13 @@
 package org.openurp.edu.extracurricular.student.web
 
 import org.beangle.cdi.bind.BindModule
+import org.openurp.edu.extracurricular.model.TutoredStd
 import org.openurp.edu.extracurricular.student.web.action.AudienceAction
+import org.openurp.edu.extracurricular.student.web.action.TutoredStdAction
 
 class DefaultModule extends BindModule {
 
   protected override def binding() {
-    bind(classOf[AudienceAction])
+    bind(classOf[AudienceAction],classOf[TutoredStdAction])
   }
 }
