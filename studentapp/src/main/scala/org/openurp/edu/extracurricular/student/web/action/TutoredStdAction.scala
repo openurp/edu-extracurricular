@@ -8,6 +8,7 @@ import org.beangle.security.Securities
 import org.beangle.data.dao.OqlBuilder
 import org.openurp.edu.base.model.Student
 import org.beangle.webmvc.api.view.View
+import org.openurp.edu.extracurricular.model.TutorialSwitch
 
 class TutoredStdAction extends RestfulAction[TutoredStd]{
   
@@ -20,6 +21,9 @@ class TutoredStdAction extends RestfulAction[TutoredStd]{
     val chooseAvtivities = tutoredStds.map(_.activity)
 
     put("chooseAvtivities", chooseAvtivities)
+    val switchBuilder = OqlBuilder.from(classOf[TutorialSwitch],"switch")
+    switchBuilder.where("switch.opened = true and switch.beginAt < :now and switch,endAt > :now",Instant.now())
+    put("switches", entityDao.search(switchBuilder))
     put("activities", entityDao.getAll(classOf[TutorialActivity]))
   }
 

@@ -22,10 +22,11 @@ import org.beangle.cdi.bind.BindModule
 import org.openurp.edu.extracurricular.web.action.LectureAction
 import org.openurp.edu.extracurricular.model.TutorialActivity
 import org.openurp.edu.extracurricular.web.action.TutorialActivityAction
+import org.openurp.edu.extracurricular.web.action.TutorialSwitchAction
 
 class DefaultModule extends BindModule {
 
   protected override def binding() {
-    bind(classOf[LectureAction],classOf[TutorialActivityAction])
+    bind(classOf[LectureAction],classOf[TutorialActivityAction],classOf[TutorialSwitchAction])
   }
 }
