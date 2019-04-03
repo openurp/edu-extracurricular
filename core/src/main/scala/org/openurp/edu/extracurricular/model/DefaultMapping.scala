@@ -38,7 +38,7 @@ class DefaultMapping extends MappingModule {
       e.stds is depends("activity")))
 
     bind[TutoredStd]
-    
+
     bind[TutorialSwitch]
   }
 }
