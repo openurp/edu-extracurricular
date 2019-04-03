@@ -30,6 +30,7 @@ import org.openurp.edu.base.model.Project
 import org.openurp.edu.base.model.Semester
 import java.util.Date
 import java.time.LocalDate
+import org.openurp.edu.extracurricular.model.Audience
 
 class LectureAction extends RestfulAction[Lecture] {
 
@@ -82,7 +83,16 @@ class LectureAction extends RestfulAction[Lecture] {
     builder.where("semester.beginOn <= :date and semester.endOn >= :date", date.get)
     val semesters = entityDao.search(builder)
     lecture.semester = semesters(0)
+    lecture.actual = lecture.audiences.size
     super.saveAndRedirect(lecture)
+  }
+
+  def audiences(): View = {
+    val lectureId = longId("lecture")
+    val lecture = entityDao.get(classOf[Lecture], lectureId)
+    put("lecture", lecture)
+    put("audiences", lecture.audiences)
+    forward()
   }
 
 }

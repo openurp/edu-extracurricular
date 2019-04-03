@@ -8,7 +8,7 @@
     [@b.startend label="时间"
       name="tutorialSwitch.beginAt,tutorialSwitch.endAt" required="true,true"
       start=(tutorialSwitch.beginAt)! end=(tutorialSwitch.endAt)! format="yyyy-MM-dd HH:mm" style="width:200px"/]
-    [@b.radios label="开关状态" name="tutorialSwitch.opened" value=tutorialSwitch.opened items="1:common.yes,0:common.no" required="true"/]
+    [@b.radios label="开关状态" name="tutorialSwitch.opened" value=tutorialSwitch.opened items="1:打开,0:关闭" required="true"/]
     [@b.textarea name="tutorialSwitch.remark" label="注意事项" value="${tutorialSwitch.remark!}" maxlength="500" style="width:200px;"/]
     [@b.formfoot]
       [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]

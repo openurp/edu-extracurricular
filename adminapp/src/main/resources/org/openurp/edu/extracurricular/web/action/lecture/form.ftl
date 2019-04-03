@@ -19,7 +19,6 @@
     [@b.textfield name="lecture.location" label="地点" value="${lecture.location!}" maxlength="100" style="width:200px;"/]
     [@b.textfield name="lecture.teachers" label="组织教师" value="${lecture.teachers!}" required="true" maxlength="500" style="width:200px;"/]
     [@b.textfield name="lecture.capacity" label="最大容量" value="${lecture.capacity!}" required="true" maxlength="20" style="width:200px;"/]
-    [@b.textfield name="lecture.actual" label="实际学生" value="${lecture.actual!}" required="true" maxlength="20" style="width:200px;"/]
     [@b.formfoot]
       [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
     [/@]

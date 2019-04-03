@@ -40,6 +40,8 @@ class TutorialActivity extends LongId {
 
   var subject: String = _
 
+  var location: String = _
+
   var capacity: Int = _
 
   var stds: Buffer[TutoredStd] = Collections.newBuffer[TutoredStd]

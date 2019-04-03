@@ -27,22 +27,40 @@ import org.beangle.data.dao.OqlBuilder
 import org.openurp.edu.base.model.Student
 import org.beangle.webmvc.api.view.View
 import org.openurp.edu.extracurricular.model.TutorialSwitch
+import java.time.LocalDate
 
-class TutoredStdAction extends RestfulAction[TutoredStd]{
+class TutoredStdAction extends RestfulAction[TutoredStd] {
 
-    override protected def indexSetting(): Unit = {
+  override protected def indexSetting(): Unit = {
     val user = Securities.user
     val stdBuilder = OqlBuilder.from(classOf[Student], "student")
     stdBuilder.where("student.user.code =:code ", user)
     val students = entityDao.search(stdBuilder)
     val tutoredStds = entityDao.findBy(classOf[TutoredStd], "std", students)
     val chooseAvtivities = tutoredStds.map(_.activity)
-
     put("chooseAvtivities", chooseAvtivities)
-    val switchBuilder = OqlBuilder.from(classOf[TutorialSwitch],"switch")
-    switchBuilder.where("switch.opened = true and switch.beginAt < :now and switch,endAt > :now",Instant.now())
+    put("switch", entityDao.getAll(classOf[TutorialSwitch])(0))
+    val switchBuilder = OqlBuilder.from(classOf[TutorialSwitch], "switch")
+    switchBuilder.where("switch.opened = true and switch.beginAt < :now and switch.endAt > :now", Instant.now())
     put("switches", entityDao.search(switchBuilder))
-    put("activities", entityDao.getAll(classOf[TutorialActivity]))
+  }
+
+  def activities(): View = {
+    val user = Securities.user
+    val stdBuilder = OqlBuilder.from(classOf[Student], "student")
+    stdBuilder.where("student.user.code =:code ", user)
+    val students = entityDao.search(stdBuilder)
+    val tutoredStds = entityDao.findBy(classOf[TutoredStd], "std", students)
+    val chooseAvtivities = tutoredStds.map(_.activity)
+    put("chooseAvtivities", chooseAvtivities)
+    
+    val switchBuilder = OqlBuilder.from(classOf[TutorialSwitch], "switch")
+    switchBuilder.where("switch.opened = true and switch.beginAt < :now and switch.endAt > :now", Instant.now())
+    put("switches", entityDao.search(switchBuilder))
+    val activityBuilder = OqlBuilder.from(classOf[TutorialActivity], "activity")
+    activityBuilder.where("activity.date >:now", LocalDate.now())
+    put("activities", entityDao.search(activityBuilder))
+    forward()
   }
 
   protected def choose(): View = {
@@ -64,13 +82,13 @@ class TutoredStdAction extends RestfulAction[TutoredStd]{
         tutoredStd.std = students(0)
         tutoredStd.updatedAt = Instant.now()
         entityDao.saveOrUpdate(tutoredStd)
+        redirect("index", "预约成功")
       } else {
         redirect("index", "与已选课堂活动时间冲突")
       }
     } else {
       redirect("index", "所选课堂活动人数已满")
     }
-    redirect("index")
   }
 
   protected def unChoose(): View = {

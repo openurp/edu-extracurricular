@@ -10,6 +10,7 @@
       name="tutorialActivity.beginAt,tutorialActivity.endAt" required="true,true"
       start=(tutorialActivity.beginAt)! end=(tutorialActivity.endAt)! format="HH:mm" style="width:200px"/]
     [@b.textfield name="tutorialActivity.subject" label="活动名称" value="${tutorialActivity.subject!}" required="true" maxlength="100" style="width:200px;"/]
+    [@b.textfield name="tutorialActivity.location" label="地点" value="${tutorialActivity.location!}" maxlength="100" style="width:200px;" required="true"/]
     [@b.field label="指导教师"]
       <select id="teacherId" name="tutorialActivity.teacher.id" style="width:200px;">
         <option value='${(tutorialActivity.teacher.id)!}' selected>${(tutorialActivity.teacher.user.name)!}</option>

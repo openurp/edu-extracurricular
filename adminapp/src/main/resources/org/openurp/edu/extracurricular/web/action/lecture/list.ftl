@@ -16,7 +16,7 @@
     [@b.col width="10%" property="location" title="地点"/]
     [@b.col width="10%" property="teachers" title="组织教师"/]
     [@b.col width="5%" property="capacity" title="最大容量"/]
-    [@b.col width="5%" property="actual" title="实际学生"/]
+    [@b.col width="5%" property="actual" title="实际学生"][@b.a href="!audiences?id=${lecture.id}"]${lecture.actual}[/@][/@]
     [@b.col width="10%" property="semester" title="学年学期"]${(lecture.semester.schoolYear)!}学年${(lecture.semester.name?replace('0','第'))!}学期[/@]
   [/@]
 [/@]

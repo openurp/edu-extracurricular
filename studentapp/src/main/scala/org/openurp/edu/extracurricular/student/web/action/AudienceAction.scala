@@ -31,6 +31,7 @@ import org.beangle.data.dao.OqlBuilder
 import org.openurp.edu.base.model.Student
 import java.time.Instant
 import org.beangle.commons.collection.Collections
+import java.time.LocalDate
 
 class AudienceAction extends RestfulAction[Audience] {
 
@@ -43,7 +44,24 @@ class AudienceAction extends RestfulAction[Audience] {
     val chooseLectures = audiences.map(_.lecture)
 
     put("chooseLectures", chooseLectures)
-    put("lectures", entityDao.getAll(classOf[Lecture]))
+    val lectureBuilder = OqlBuilder.from(classOf[Lecture], "lecture")
+    lectureBuilder.where("lecture.date >:now", LocalDate.now())
+    put("lectures", entityDao.search(lectureBuilder))
+  }
+
+  def lectures(): View = {
+    val user = Securities.user
+    val stdBuilder = OqlBuilder.from(classOf[Student], "student")
+    stdBuilder.where("student.user.code =:code ", user)
+    val students = entityDao.search(stdBuilder)
+    val audiences = entityDao.findBy(classOf[Audience], "std", students)
+    val chooseLectures = audiences.map(_.lecture)
+
+    put("chooseLectures", chooseLectures)
+    val lectureBuilder = OqlBuilder.from(classOf[Lecture], "lecture")
+    lectureBuilder.where("lecture.date >:now", LocalDate.now())
+    put("lectures", entityDao.search(lectureBuilder))
+    forward()
   }
 
   protected def choose(): View = {
@@ -66,14 +84,16 @@ class AudienceAction extends RestfulAction[Audience] {
         audience.lecture = lecture
         audience.std = students(0)
         audience.updatedAt = Instant.now()
+        audience.lecture.actual = audience.lecture.audiences.size + 1
+        saveOrUpdate(audience.lecture)
         entityDao.saveOrUpdate(audience)
+        redirect("index", "选择成功")
       } else {
         redirect("index", "与已选课堂活动时间冲突")
       }
     } else {
       redirect("index", "所选课堂活动人数已满")
     }
-    redirect("index")
   }
 
   protected def unChoose(): View = {
@@ -82,14 +102,24 @@ class AudienceAction extends RestfulAction[Audience] {
     stdBuilder.where("student.user.code =:code ", user)
     val students = entityDao.search(stdBuilder)
 
-    val lecture = entityDao.find(classOf[Lecture], longId("lecture"))
+    val lecture = entityDao.find(classOf[Lecture], longId("lecture")).get
     val audienceBuilder = OqlBuilder.from(classOf[Audience], "audience")
     audienceBuilder.where("audience.std =:std", students(0))
     audienceBuilder.where("audience.lecture =:lecture", lecture)
     val audiences = entityDao.search(audienceBuilder)
     entityDao.remove(audiences)
+    lecture.actual = lecture.audiences.size
+    entityDao.saveOrUpdate(lecture)
 
     redirect("index")
+  }
+
+  override protected def saveAndRedirect(audience: Audience): View = {
+    val a = audience.lecture.actual
+    val b = audience.lecture.audiences.size
+    audience.lecture.actual = audience.lecture.audiences.size
+    saveOrUpdate(audience.lecture)
+    super.saveAndRedirect(audience)
   }
 
 }
