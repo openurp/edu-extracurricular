@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title="可选辅导活动"/]
+[@b.toolbar title="可选辅导活动"]bar.addBack();[/@]
 [#if switches ?? && switches?size>0]
   [#if activities?? && activities?size>0]
     [@b.grid items=activities?sort_by("date") var="activity" sortable="false"]

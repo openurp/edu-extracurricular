@@ -16,6 +16,6 @@
 [/#if]
 <div><span style="font-weight: bold;color: red">注意事项：</span>预约辅导活动开放时间为${switch.beginAt}到${switch.endAt }</div>
 [#if switches ?? && switches?size>0]
-<div  style="text-align: center"><a class="btn btn-default" href="activities" role="button">预约</a></div>
+<div  style="text-align: center">[@b.a class="btn btn-default" href="!activities" role="button"]预约[/@]</div>
 [/#if]
 [@b.foot/]
