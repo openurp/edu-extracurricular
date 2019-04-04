@@ -39,6 +39,7 @@ class DefaultMapping extends MappingModule {
 
     bind[TutoredStd]
 
-    bind[TutorialSwitch]
+    bind[TutorialSwitch].on(e => declare(
+      e.remark is length(1000)))
   }
 }

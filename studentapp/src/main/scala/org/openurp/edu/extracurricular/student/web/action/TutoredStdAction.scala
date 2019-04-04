@@ -53,7 +53,7 @@ class TutoredStdAction extends RestfulAction[TutoredStd] {
     val tutoredStds = entityDao.findBy(classOf[TutoredStd], "std", students)
     val chooseAvtivities = tutoredStds.map(_.activity)
     put("chooseAvtivities", chooseAvtivities)
-    
+
     val switchBuilder = OqlBuilder.from(classOf[TutorialSwitch], "switch")
     switchBuilder.where("switch.opened = true and switch.beginAt < :now and switch.endAt > :now", Instant.now())
     put("switches", entityDao.search(switchBuilder))

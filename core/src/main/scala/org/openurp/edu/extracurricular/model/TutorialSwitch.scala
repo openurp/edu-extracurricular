@@ -27,5 +27,4 @@ class TutorialSwitch extends LongId with Named with Remark with TemporalAt{
 
   var opened : Boolean = false
 
-
 }
