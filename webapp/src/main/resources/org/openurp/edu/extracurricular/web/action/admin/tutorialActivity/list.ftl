@@ -31,7 +31,7 @@ function copy()
       var week=prompt("请填写复制周数","");
       if(week)
       {
-    	  bg.form.submit("tutorialActivitySearchForm","${b.url('!copy')}"+"?activityId=" + avtivityIds +"&week=" +week);
+        bg.form.submit("tutorialActivitySearchForm","${b.url('!copy')}"+"?activityId=" + avtivityIds +"&week=" +week);
       }
     }
 }

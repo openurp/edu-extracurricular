@@ -8,8 +8,8 @@
       [@b.textfield name="tutorialActivity.subject" label="名称"/]
       [@b.textfield name="tutorialActivity.teacher.user.name" label="教师"/]
       [@b.textfield name="tutorialActivity.location" label="地点"/]
-	    [@b.datepicker label="日期" id="tutorialActivity.date" name="tutorialActivity.date"
-	    value="${(tutorialActivity.date?string('yyyy-MM-dd'))?default('')}" format="yyyy-MM-dd" /]
+      [@b.datepicker label="日期" id="tutorialActivity.date" name="tutorialActivity.date"
+      value="${(tutorialActivity.date?string('yyyy-MM-dd'))?default('')}" format="yyyy-MM-dd" /]
       [@b.select label="学年学期" name="tutorialActivity.semester.id" items={}]
         <option value="">...</option>
         [#list semesters?sort_by("code")?reverse as semester]

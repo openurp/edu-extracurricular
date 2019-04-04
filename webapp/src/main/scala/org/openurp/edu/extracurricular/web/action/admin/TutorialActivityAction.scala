@@ -52,7 +52,7 @@ class TutorialActivityAction extends RestfulAction[TutorialActivity] {
         case "1" => {
           builder.where("size(activity.stds)=activity.capacity")
         }
-        case "2" => 
+        case "2" =>
       })
     populateConditions(builder)
     builder.orderBy(get(Order.OrderStr).orNull).limit(getPageLimit)

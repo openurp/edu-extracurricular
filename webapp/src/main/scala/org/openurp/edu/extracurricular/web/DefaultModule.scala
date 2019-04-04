@@ -30,7 +30,7 @@ class DefaultModule extends BindModule {
 
   protected override def binding() {
     bind(classOf[LectureAction],classOf[TutorialActivityAction],classOf[TutorialSwitchAction],classOf[TutoredStdAction])
-    
+
     bind(classOf[LectureReservationAction],classOf[ActivityReservationAction])
   }
 }
